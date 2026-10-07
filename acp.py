@@ -197,6 +197,13 @@ def flatten_acp(acp):
     algorithm.
     """
 
+    acp = build_acp(
+    labels=client_labels,
+    all_labels=global_labels
+)
+
+vector = flatten_acp(acp)
+
     return np.concatenate([
         acp["presence"],
         acp["frequency"],
