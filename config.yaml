@@ -1,0 +1,137 @@
+# ============================================================
+# Attack-Fed Configuration
+# ============================================================
+
+project:
+  name: "Attack-Fed"
+  description: >
+    Attack-aware Federated Learning via Prototype-guided
+    Cross-cluster Knowledge Transfer for Label-space
+    Heterogeneous Intrusion Detection
+
+
+# ============================================================
+# Dataset
+# ============================================================
+
+dataset:
+  name: "CIC-IoT-2023"
+
+  available:
+    - "CIC-IoT-2023"
+    - "UNSW-NB15"
+    
+
+  data_dir: "./data"
+
+
+# ============================================================
+# Federated Learning
+# ============================================================
+
+federated:
+  num_clients: 20
+  num_rounds: 100
+  local_epochs: 1
+  client_fraction: 1.0
+
+
+# ============================================================
+# Local Training
+# ============================================================
+
+training:
+  batch_size: 64
+  learning_rate: 0.001
+  optimizer: "Adam"
+
+  latent_dim: 32
+
+  device: "cuda"
+
+
+
+
+heterogeneity:
+  enabled: true
+
+
+  partial_label_space: true
+
+  distribution: "non_iid"
+
+
+# ============================================================
+# Attack Category Profile (ACP)
+# ============================================================
+
+acp:
+  enabled: true
+
+  # Presence component
+  use_presence: true
+
+  # Frequency component
+  use_frequency: true
+
+  # Diversity component
+  use_diversity: true
+
+  normalize: true
+
+
+
+
+clustering:
+  enabled: true
+
+  algorithm: "affinity_propagation"
+
+  damping: 0.9
+
+  max_iter: 200
+
+  convergence_iter: 15
+
+
+
+
+prototypes:
+  enabled: true
+
+  aggregation: "mean"
+
+
+
+
+crg:
+  enabled: true
+
+  threshold: 0.5
+
+
+
+
+knowledge_transfer:
+  enabled: true
+
+  lambda_transfer: 0.1
+
+  strategy: "knowledge_guided"
+
+
+
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "macro_f1"
+
+  save_results: true
+
+  results_dir: "./results"
+
+
+
+  seed: 42
